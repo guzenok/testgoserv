@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+
+    balancer:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - ./nginx.conf/:/etc/nginx/
+        depends_on:
+            - app1
+            - app2
+        networks:
+            - code-network
+
+    app1:
+        image: testgoserv
+        environment:
+            INSTANCE_NAME: app1
+        networks:
+            - code-network
+
+    app2:
+        image: testgoserv
+        environment:
+            INSTANCE_NAME: app2
+        networks:
+            - code-network
+
+networks:
+    code-network:
+        driver: bridge

@@ -1,0 +1,19 @@
+language: go
+
+go:
+  - 1.7.x
+
+sudo: required
+
+services:
+  - docker
+
+script:
+  - make
+  - go test -cpu=1,2 -v -tags integration ./...
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push USER/REPO;
+    fi
