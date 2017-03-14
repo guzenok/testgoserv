@@ -13,8 +13,15 @@ script:
   - go test -cpu=1,2 -v -tags integration ./...
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "develop" ]; then
-    docker tag testgoserv testgoserv:$(cat VERSION);
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker tag testgoserv $DOCKER_USERNAME/testgoserv:$(cat VERSION);
+    docker tag testgoserv $DOCKER_USERNAME/testgoserv:latest;
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push $DOCKER_USERNAME/testgoserv:$(cat VERSION);
+    docker push $DOCKER_USERNAME/testgoserv:latest;
+    fi
+  - if [ "$TRAVIS_BRANCH" == "develop" ]; then
+    docker tag testgoserv $DOCKER_USERNAME/testgoserv:alpha;
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push $DOCKER_USERNAME/testgoserv:alpha;
     fi
