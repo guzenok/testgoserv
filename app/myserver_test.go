@@ -22,7 +22,7 @@ func TestMyHandler(t *testing.T) {
 		if resp.StatusCode != 200 {
 			t.Fatalf("Received non-200 response: %d\n", resp.StatusCode)
 		}
-		expected := fmt.Sprintf("Visitor count: %d (by app).", i)
+		expected := fmt.Sprintf("%s get %d-nd response", "app", i)
 		actual, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			t.Fatal(err)

@@ -19,5 +19,5 @@ func (h *MyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	count = h.count
 	h.Unlock()
 
-	fmt.Fprintf(w, "Visitor count: %d (by %s).", count, os.Getenv("INSTANCE_NAME"))
+	fmt.Fprintf(w, "%s get %d-nd response", os.Getenv("INSTANCE_NAME"), count)
 }
