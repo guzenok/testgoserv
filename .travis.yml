@@ -14,6 +14,7 @@ script:
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "develop" ]; then
+    docker tag testgoserv testgoserv:$(cat VERSION);
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push $DOCKER_USERNAME/testgoserv:$(cat VERSION);
     fi
