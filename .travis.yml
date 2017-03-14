@@ -13,7 +13,7 @@ script:
   - go test -cpu=1,2 -v -tags integration ./...
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+  - if [ "$TRAVIS_BRANCH" == "develop" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push USER/REPO;
+    docker push $DOCKER_USERNAME/testgoserv:$(cat VERSION);
     fi
