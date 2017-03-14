@@ -15,16 +15,16 @@ services:
             - code-network
 
     app1:
-        image: testgoserv
+        image: guzenok/testgoserv:latest
         environment:
-            INSTANCE_NAME: app1
+            INSTANCE_NAME: App-Node-1
         networks:
             - code-network
 
     app2:
-        image: testgoserv
+        image: guzenok/testgoserv:latest
         environment:
-            INSTANCE_NAME: app2
+            INSTANCE_NAME: App-Node-2
         networks:
             - code-network
 
